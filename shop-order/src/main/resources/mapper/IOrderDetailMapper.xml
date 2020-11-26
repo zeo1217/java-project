@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.IOrderDetailMapper">
+
+    <insert id="batchAddOrderDetail">
+
+        insert into t_order_detail_${tabIndex}
+            (
+                oid,
+                gid,
+                gname,
+                gdesc,
+                gpic,
+                gsum,
+                gprice,
+                sub_total
+            ) values
+        <foreach collection="list" item="od" separator=",">
+            (
+              #{od.oid},
+              #{od.gid},
+              #{od.gname},
+              #{od.gdesc},
+              #{od.gpic},
+              #{od.gsum},
+              #{od.gprice},
+              #{od.subTotal}
+            )
+        </foreach>
+
+    </insert>
+
+</mapper>

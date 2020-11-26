@@ -1,0 +1,7 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: shop-resources
+fdfs:
+  server: http://118.178.253.58:8090/

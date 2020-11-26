@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    config:
+      uri: http://localhost:9999
+      profile: eureka-client,shop-sso,shop-thymeleaf,shop-mq
+      name: application
+  main:
+    allow-bean-definition-overriding: true #当遇到相同名字的bean时，允许覆盖注册

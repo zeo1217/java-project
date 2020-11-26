@@ -1,0 +1,21 @@
+spring:
+  cloud:
+    config:
+      uri: http://localhost:9999
+      profile: eureka-client,shop-order,shop-thymeleaf
+      name: application
+
+  datasource1:
+    username: root
+    password: 123
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/2002-shop
+    alias: db1
+  datasource2:
+    username: root
+    password: 123
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/2002-shop-2
+    alias: db2
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml

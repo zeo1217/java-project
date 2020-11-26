@@ -1,0 +1,7 @@
+server:
+  port: 8092
+spring:
+  application:
+    name: shop-back
+  thymeleaf:
+    cache: false

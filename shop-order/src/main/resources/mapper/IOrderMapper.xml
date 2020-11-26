@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.IOrderMapper">
+
+    <insert id="addOrder">
+        insert into
+          t_order_${tabIndex}  (id,uid,total_price,name,address,mobile,status,create_date)
+        values
+          (#{order.id},#{order.uid},#{order.totalPrice},#{order.name},#{order.address},#{order.mobile},#{order.status},#{order.createDate})
+    </insert>
+
+    <resultMap id="orderResultMap" type="order">
+        <id column="id" property="id"/>
+        <result column="uid" property="uid"/>
+        <result column="total_price" property="totalPrice"/>
+        <result column="status" property="status"/>
+        <result column="create_date" property="createDate"/>
+    </resultMap>
+
+
+
+    <resultMap id="orderDetailResultMap" type="order" extends="orderResultMap">
+        <id column="oid" property="id"/>
+        <collection property="orderDetailList" ofType="orderDetail">
+            <id column="odid" property="id"/>
+            <result column="oid" property="oid"/>
+            <result column="gid" property="gid"/>
+            <result column="gname" property="gname"/>
+            <result column="gdesc" property="gdesc"/>
+            <result column="gpic" property="gpic"/>
+            <result column="gsum" property="gsum"/>
+            <result column="gprice" property="gprice"/>
+            <result column="sub_total" property="subTotal"/>
+        </collection>
+    </resultMap>
+
+    <select id="getOrderById" resultMap="orderResultMap">
+        select *  from t_order_${tabIndex} where id = #{orderId}
+    </select>
+
+    <update id="updateOrderStatus">
+        update t_order_${tabIndex} set status = #{status} where id = #{orderId}
+    </update>
+
+
+    <select id="getOrderListByUid" resultMap="orderDetailResultMap">
+          SELECT
+                o.*,
+                od.*,
+                o.id as oid,
+                od.id as odid
+            FROM
+                t_order_${tabIndex} o
+            LEFT JOIN t_order_detail_${tabIndex} od ON (o.id = od.oid)
+            WHERE
+                o.uid = #{userId}
+    </select>
+
+</mapper>

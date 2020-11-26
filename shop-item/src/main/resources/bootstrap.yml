@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    config:
+      uri: http://localhost:9999
+      profile: eureka-client,shop-item,shop-mq
+      name: application
+
